@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /Users/Magina/Documents/workspace/IPC_AIDL_Messenger_Demo/src/com/example/aidlclient_demo/aidl/IServer.aidl
+ * Original file: /Users/Magina/github/Android_IPC/IPC_AIDL_Messenger_Demo/src/com/example/aidlclient_demo/aidl/IServer.aidl
  */
 package com.example.aidlclient_demo.aidl;
 public interface IServer extends android.os.IInterface
@@ -52,6 +52,24 @@ reply.writeNoException();
 reply.writeString(_result);
 return true;
 }
+case TRANSACTION_registListener:
+{
+data.enforceInterface(DESCRIPTOR);
+com.example.aidlclient_demo.aidl.IListener _arg0;
+_arg0 = com.example.aidlclient_demo.aidl.IListener.Stub.asInterface(data.readStrongBinder());
+this.registListener(_arg0);
+reply.writeNoException();
+return true;
+}
+case TRANSACTION_unregistListener:
+{
+data.enforceInterface(DESCRIPTOR);
+com.example.aidlclient_demo.aidl.IListener _arg0;
+_arg0 = com.example.aidlclient_demo.aidl.IListener.Stub.asInterface(data.readStrongBinder());
+this.unregistListener(_arg0);
+reply.writeNoException();
+return true;
+}
 }
 return super.onTransact(code, data, reply, flags);
 }
@@ -88,8 +106,42 @@ _data.recycle();
 }
 return _result;
 }
+@Override public void registListener(com.example.aidlclient_demo.aidl.IListener listener) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
+mRemote.transact(Stub.TRANSACTION_registListener, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
+@Override public void unregistListener(com.example.aidlclient_demo.aidl.IListener listener) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
+mRemote.transact(Stub.TRANSACTION_unregistListener, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
 }
 static final int TRANSACTION_getString = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+static final int TRANSACTION_registListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+static final int TRANSACTION_unregistListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
 }
 public java.lang.String getString(java.lang.String str) throws android.os.RemoteException;
+public void registListener(com.example.aidlclient_demo.aidl.IListener listener) throws android.os.RemoteException;
+public void unregistListener(com.example.aidlclient_demo.aidl.IListener listener) throws android.os.RemoteException;
 }
